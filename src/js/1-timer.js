@@ -31,6 +31,7 @@ const options = {
               message: 'Please choose a date in the future',
               messageColor: '#fff',
               backgroundColor: '#ef4040',
+              position: 'topRight',
               });
             }
     }, 
