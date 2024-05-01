@@ -20,18 +20,13 @@
   border: 1px solid #808080;
 }
 
-.datepcr:hover {
-  border: 1px solid #000;
-}
-
 .datepcr:active {
-  border: 1px solid #4e75ff;
+  border: 1px solid #000;
 }
 
 .datepcr:disabled {
   color: #808080;
   background-color: #fafafa;
-  
 }
 
 .timer {
