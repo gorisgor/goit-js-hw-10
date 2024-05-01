@@ -17,6 +17,21 @@
   line-height: 1.5;
   letter-spacing: 0.04em;
   color: #2e2f42;
+  border: 1px solid #808080;
+}
+
+.datepcr:hover {
+  border: 1px solid #000;
+}
+
+.datepcr:active {
+  border: 1px solid #4e75ff;
+}
+
+.datepcr:disabled {
+  color: #808080;
+  background-color: #fafafa;
+  
 }
 
 .timer {
