@@ -45,10 +45,12 @@ intervalId = setInterval(()=>{
   const currentTime = Date.now();
   const deltaTime = endTime - currentTime;
   refs.btn.disabled = true;
+  refs.calendar.disabled = true;
     if (deltaTime <= 0) {
       clearInterval(intervalId);
       updateClockface({ days: '00', hours: '00', minutes: '00', seconds: '00' });
       refs.btn.disabled = false;
+      refs.calendar.disabled = false;
     } else {
       const time = convertMs(deltaTime);
       updateClockface(time);
