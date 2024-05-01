@@ -28,10 +28,10 @@ const options = {
           } else {
             refs.btn.disabled = true;
             iziToast.show({
-              title: 'Hey',
-              message: 'Please choose a date in the future'
-            });
-            // alert("Please choose a date in the future")
+              message: 'Please choose a date in the future',
+              messageColor: '#fff',
+              backgroundColor: '#ef4040',
+              });
             }
     }, 
   };
