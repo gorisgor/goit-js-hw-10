@@ -65,6 +65,11 @@
   background-color: #6c8cff;
 }
 
+.start-btn:disabled {
+  color: #989898;
+  background-color: #cfcfcf;
+}
+
 .form {
   width: 360px;
   display: flex;
