@@ -41,15 +41,17 @@ const onSubmit = event => {
     createPromise(state.includes('fulfilled') ? 'fulfilled' : 'rejected', delay)
         .then(message => {
             iziToast.success({
-                title: 'Success',
                 message: message,
+                messageColor: '#fff',
+                backgroundColor: '#59a10d',
                 position: 'topRight',
             });
         })
         .catch(error => {
             iziToast.error({
-                title: 'Error',
                 message: error,
+                messageColor: '#fff',
+                backgroundColor: '#ef4040',
                 position: 'topRight',
             });
         });
