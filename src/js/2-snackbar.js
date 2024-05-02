@@ -50,7 +50,6 @@ function onSubmit(event) {
         }, selectedDelayTime);
     });
         promise.then(message => {
-            refs.delayInput.value = '';
             iziToast.show({
                 message: message,
                 messageColor: '#fff',
