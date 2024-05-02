@@ -31,20 +31,23 @@ function onSubmit(event) {
     });
 
     let selectedState = '';
+    let selectedDelayTime = 0;
     if (state.includes('fulfilled')) {
         selectedState = 'fulfilled';
+        selectedDelayTime = delayTime;
     } else if (state.includes('rejected')) {
         selectedState = 'rejected';
+        selectedDelayTime = delayTime;
     }
 
     const promise = new Promise((resolve, reject) => {
         setTimeout(() => {
             if (selectedState === 'fulfilled') {
-                resolve(`✅ Fulfilled promise in ${delayTime}ms`);
+                resolve(`✅ Fulfilled promise in ${selectedDelayTime}ms`);
             } else if (selectedState === 'rejected') {
-                reject(`❌ Rejected promise in ${delayTime}ms`);
+                reject(`❌ Rejected promise in ${selectedDelayTime}ms`);
             }
-        }, delayTime);
+        }, selectedDelayTime);
     });
         promise.then(message => {
             iziToast.show({
