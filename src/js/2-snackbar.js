@@ -55,6 +55,7 @@ function onSubmit(event) {
                 messageColor: '#fff',
                 backgroundColor: '#59a10d',
                 position: 'topRight',
+                progressBar: false,
             });
         }).catch(error => {
             iziToast.show({
@@ -62,6 +63,7 @@ function onSubmit(event) {
                 messageColor: '#fff',
                 backgroundColor: '#ef4040',
                 position: 'topRight',
+                progressBar: false,
             })
         });
 }
