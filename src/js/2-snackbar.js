@@ -24,9 +24,11 @@ function onCheckbox() {
 
 refs.submitForm.addEventListener("submit", onSubmit); 
 function onSubmit(event) {
-    console.log(state);
-    console.log(delayTime);
     event.preventDefault();
+    refs.delayInput.value = '';
+    checkboxArray.forEach(checkbox => {
+        checkbox.checked = false;
+    });
         const promise = new Promise((resolve, reject) => {
             setTimeout(() => {
                     if (state.includes('fulfilled')) {
@@ -37,6 +39,7 @@ function onSubmit(event) {
             }, delayTime);
         });
         promise.then(message => {
+            refs.delayInput.value = '';
             iziToast.show({
                 message: message,
                 messageColor: '#fff',
