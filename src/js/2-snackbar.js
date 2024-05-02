@@ -1,68 +1,58 @@
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
+const DELAY_INPUT_SELECTOR = "input[name='delay']";
+const CHECKBOX_STATE_SELECTOR = "input[name='state']";
+const SUBMIT_FORM_SELECTOR = ".form";
+
 const refs = {
-    delayInput: document.querySelector("input[name='delay']"),
-    checkboxState: document.querySelectorAll("input[name='state']"),
-    submitForm: document.querySelector(".form") 
+    delayInput: document.querySelector(DELAY_INPUT_SELECTOR),
+    checkboxState: document.querySelectorAll(CHECKBOX_STATE_SELECTOR),
+    submitForm: document.querySelector(SUBMIT_FORM_SELECTOR)
 };
 
-let delayTime = 0;
-refs.delayInput.addEventListener("change", () => {
-    delayTime = refs.delayInput.value;
-});
+const delayTime = () => Number(refs.delayInput.value);
+const selectedState = () => Array.from(refs.checkboxState).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
 
-let state = [];
-const checkboxArray = Array.from(refs.checkboxState);
-checkboxArray.forEach(checkbox => {
-    checkbox.addEventListener("change", onCheckbox);
-});
-
-function onCheckbox() {
-    state = checkboxArray.filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
-}
-
-refs.submitForm.addEventListener("submit", onSubmit); 
-function onSubmit(event) {
-    event.preventDefault();
+const clearForm = () => {
     refs.delayInput.value = '';
-    checkboxArray.forEach(checkbox => {
-        checkbox.checked = false;
-    });
+    refs.checkboxState.forEach(checkbox => checkbox.checked = false);
+};
 
-    let selectedState = '';
-    let selectedDelayTime = 0;
-    if (state.includes('fulfilled')) {
-        selectedState = 'fulfilled';
-        selectedDelayTime = delayTime;
-    } else if (state.includes('rejected')) {
-        selectedState = 'rejected';
-        selectedDelayTime = delayTime;
-    }
-
-    const promise = new Promise((resolve, reject) => {
+const createPromise = (state, delay) => {
+    return new Promise((resolve, reject) => {
         setTimeout(() => {
-            if (selectedState === 'fulfilled') {
-                resolve(`✅ Fulfilled promise in ${selectedDelayTime}ms`);
-            } else if (selectedState === 'rejected') {
-                reject(`❌ Rejected promise in ${selectedDelayTime}ms`);
+            if (state === 'fulfilled') {
+                resolve(`✅ Fulfilled promise in ${delay}ms`);
+            } else if (state === 'rejected') {
+                reject(`❌ Rejected promise in ${delay}ms`);
             }
-        }, selectedDelayTime);
+        }, delay);
     });
-        promise.then(message => {
-            refs.delayInput.value = '';
-            iziToast.show({
+};
+
+const onSubmit = event => {
+    event.preventDefault();
+    clearForm();
+
+    const state = selectedState();
+    const delay = delayTime();
+
+    createPromise(state.includes('fulfilled') ? 'fulfilled' : 'rejected', delay)
+        .then(message => {
+            iziToast.success({
+                title: 'Success',
                 message: message,
-                messageColor: '#fff',
-                backgroundColor: '#59a10d',
                 position: 'topRight',
             });
-        }).catch(error => {
-            iziToast.show({
+        })
+        .catch(error => {
+            iziToast.error({
+                title: 'Error',
                 message: error,
-                messageColor: '#fff',
-                backgroundColor: '#ef4040',
                 position: 'topRight',
-            })
+            });
         });
-}
+};
+
+refs.submitForm.addEventListener("submit", onSubmit);
