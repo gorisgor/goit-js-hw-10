@@ -53,7 +53,6 @@ const timer = {
           minutes: '00',
           seconds: '00',
         });
-        refs.btn.disabled = false;
         refs.calendar.disabled = false;
       } else {
         const time = convertMs(deltaTime);
