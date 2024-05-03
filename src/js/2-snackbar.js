@@ -24,7 +24,7 @@ function onSubmit(event) {
         message: `✅ Fulfilled promise in ${delay}ms`,
         messageColor: '#fff',
         backgroundColor: '#59a10d',
-        position: 'topRight',
+        position: 'topCenter',
         progressBar: false,
       });
     },
@@ -32,8 +32,8 @@ function onSubmit(event) {
       iziToast.show({
         message: `❌ Rejected promise in ${delay}ms`,
         messageColor: '#fff',
-        backgroundColor: '#ef4040',
-        position: 'topRight',
+        backgroundColor: '#b52222',
+        position: 'topCenter',
         progressBar: false,
       });
     }
